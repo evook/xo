@@ -19,20 +19,20 @@ We'll use `n` because it's powerful and flexible. First, you need `curl`. Then, 
 
 ```bash
 curl -o /usr/local/bin/n https://raw.githubusercontent.com/visionmedia/n/master/bin/n
-chmod +x /usr/local/bin/n
-n stable
+sudo chmod +x /usr/local/bin/n
+sudo n stable
 ```
 We'll consider at this point that you've got a working node on your box. E.g:
 
 ```
 $ node -v
-v0.10.36
+v0.12.2
 ```
 
 ### Packages
 
 ```
-apt-get install build-essential redis-server libpng-dev git python-minimal
+sudo apt-get install build-essential redis-server libpng-dev git python-minimal
 ```
 
 ## Fetching the Code
@@ -51,7 +51,7 @@ git clone http://github.com/vatesfr/xo-web
 Once you have it, you can use `npm` to install the other dependencies: go into XO-Server directory and launch the following command:
 
 ```
-npm install
+npm i && npm run build
 ```
 
 Then, you have to create a config file for XO-Server:
@@ -64,8 +64,7 @@ Edit it to have the right path to deliver XO-Web, because XO-Server embeds an HT
 
 ```yaml
   mounts:
-    '/':
-      - '../xo-web/dist/'
+    '/': - '../xo-web/dist/'
 ```
 WARNING: YAML is very strict with indentation: use spaces for it, not tabs.
 
@@ -75,7 +74,7 @@ You can try to start XO-Server to see if it works. You should have something lik
 
 ```
 $ npm start
-WebServer listening on 0.0.0.0:80
+WebServer listening on localhost:80
 [INFO] Default user: "admin@admin.net" with password "admin"
 ```
 
